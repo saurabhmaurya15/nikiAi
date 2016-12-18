@@ -1,0 +1,38 @@
+<div class="holder" *ngIf="showDetailsPopup">
+</div>
+<div id="popup" class="popup" *ngIf="showDetailsPopup">
+    <div class="close" (click)="showDetailsPopup = false;enableBgScroll()" >X</div>
+    <div class="content">
+        <p style="font-weight:600; font-size:16px">{{selectedFeed.title}}</p>
+        <p [innerHtml]="selectedFeed.content"></p>
+    </div>
+</div>
+<div style="float: right;font-size: 35px;font-weight: 600;color: cornsilk;">{{timerContent}}</div>
+<div style="font-size: 20px;color: black;">Time: {{currentTime}}</div>
+<section class="url-reader" *ngIf="!showFeed">
+    <h2 style="color: white;font-weight: 300;font-size: 50px;">Enter Url to read RSS Feed</h2>
+    <div class="">
+        <input class="textbox" type="text" [(ngModel)]="apiUrl" (keyup.enter)="getRssFeed()" />
+    </div>
+    <div style="margin-top:50px;">
+        <span class="rss-links" (click)="apiUrl='https://www.reddit.com/.rss';getRssFeed()">Reddit</span> <span class="rss-links" (click)="apiUrl='http://rss.cnn.com/rss/cnn_topstories.rss';getRssFeed()">CNN</span> <span class="rss-links" (click)="apiUrl='http://feeds.feedburner.com/TechCrunch';getRssFeed()" >TechCrunch</span>
+    </div>
+</section>
+<div class="main-ctr" *ngIf="showFeed && feeds">
+    <div class="main-ctr-heading" (click)="showFeed = false">Rss Feed Stories</div>
+    <div class="main-ctr-secondary-heading"><a [href]="feeds.link" target="_blank">{{feeds.title}}</a></div>
+    <div class="card" *ngFor="#feed of feeds.entries;#i=index">
+        <div (click)="selectedFeed = feed;disableBgScroll();showDetailsPopup = true">
+            <div class="close-card" (click)="removeStoryFromFeed(i)">X</div>
+            <img class="flicker-image" [src]="feed?.url ||'http://www.freeiconspng.com/uploads/rss-logo-icon-png-31.png'" alt="reddit_Test">
+            <div class="title">
+                <p style="max-height: 90px;overflow: hidden;">{{feed?.title}}</p>
+                <p class="bold"> -{{feed?.contentSnippet}}</p>
+                <p style="text-align:left">Category: {{(feed.categories).join()}}</p>
+                <p style="text-align:right">-{{(feed.publishedDate).substr(0, feed.publishedDate.length - 6)}}</p>
+            </div>
+        </div>
+    </div>
+    <div class="loading-details loader" *ngIf="infoRequested">
+    </div>
+</div>
