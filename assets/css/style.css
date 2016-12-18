@@ -68,6 +68,7 @@ img.flicker-image {
     color: white;
     padding-right: 14px;
     padding-left: 14px;
+    width: 400px;
 }
 
 .bold {
@@ -122,7 +123,7 @@ img.flicker-image {
     background: black;
     position: fixed;
     opacity: 0.7;
-    margin-top: -108px;
+    margin-top: -88px;
     z-index: 2;
 }
 .popup{
