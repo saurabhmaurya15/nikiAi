@@ -127,7 +127,7 @@ img.flicker-image {
     z-index: 2;
 }
 .popup{
-    width: 508px;
+    min-width: 508px;
     border-radius: 7px;
     background: #6b6a63;
     margin: 30px auto 0;
@@ -141,11 +141,14 @@ img.flicker-image {
     left: 0;
     right: 0;
     z-index: 3;
+    max-width: 745px;
 }
 
 .content{
-    background:#fff;
+    background: #fff;
     padding: 28px 26px 33px 25px;
+    max-height: 334px;
+    overflow: scroll;
 }
 .close {
     text-align: right;
